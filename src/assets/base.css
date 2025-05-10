@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  /* COLORS */
+  --color-white: #ddd;
+  --color-black: #333;
+  --bg-primary: #111;
+  --header-box-shadow: 0px -200px 150px 0 var(--bg-primary) inset;
+
+  /* TYPOHRAPHY */
+  --font-family-heading: 'Amatic SC';
+  --font-family-text: 'Raleway';
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-white);
+  background: var(--bg-primary);
+  line-height: 1.6;
+  font-family:
+    var(--font-family-text),
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 16px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  ::selection {
+    background-color: forestgreen;
+    color: var(--color-white);
+  }
+}

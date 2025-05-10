@@ -1,0 +1,55 @@
+@import './base.css';
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  color: var(--color-heading);
+  font-size: 2rem;
+  font-family: 'Amatic SC', sans-serif;
+  font-weight: 700;
+  padding: 1rem;
+  background-color: rgba(17, 17, 17, 0.8);
+  z-index: 1000;
+}
+/*ako se stavi slika logo ovo ne treba*/
+nav .logo {
+  font-weight: 700;
+  text-decoration: none !important;
+}
+
+nav .nav-links {
+  margin: 0 auto;
+  display: flex;
+  gap: 2rem;
+}
+
+nav a {
+  color: inherit;
+  text-decoration: none;
+  transition: font-weight 0.3s;
+}
+
+nav .router-link-active {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  padding-top: 5.2rem;
+}
+
+footer {
+  margin-top: 5rem;
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.4rem;
+  color: var(--color-white);
+  background-color: rgba(17, 17, 17, 0.8);
+}
