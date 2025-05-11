@@ -16,7 +16,6 @@ onMounted(() => {
       scrollTrigger: {
         trigger: section,
         start: 'top 80%',
-        end: 'top 30%',
         toggleActions: 'play none none reverse'
       }
     })
@@ -641,17 +640,6 @@ section {
   padding: 2rem 0;
   margin: 2rem 0;
   text-align: justify;
-}
-
-section:first-child {
-  height: 90vh;
-  position: relative;
-}
-
-section:first-child img {
-  position: absolute;
-  right: 0;
-  bottom: 0;
 }
 
 section h1 {
