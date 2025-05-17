@@ -12,7 +12,7 @@ onMounted(() => {
     gsap.from(section, {
       opacity: 0,
       y: 50,
-      duration: 1,
+      duration: 2,
       scrollTrigger: {
         trigger: section,
         start: 'top 80%',
@@ -634,6 +634,15 @@ header span {
   transform: translateY(-100px);
   font-weight: 900;
   user-select: none;
+}
+
+@media screen and (max-width: 768px) {
+  header h1 {
+    font-size: 5rem;
+  }
+  header span {
+    font-size: 2rem;
+  }
 }
 
 section {

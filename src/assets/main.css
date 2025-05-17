@@ -46,9 +46,14 @@ main {
 }
 
 footer {
-  padding: 4em 2em;
   text-align: center;
   font-size: 1.4rem;
   color: var(--color-white);
   background-color: rgba(17, 17, 17, 0.8);
+}
+footer svg {
+  padding-bottom: 1rem;
+}
+footer p {
+  padding: 4em 2em;
 }
