@@ -1,18 +1,59 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollTrigger, SplitText } from 'gsap/all'
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger, SplitText)
 
-onMounted(() => {
+const waitForFonts = async () => {
+  //čekam da se fontovi učitaju da SplitText pravilno izračuna veličinu slova
+  return document.fonts.ready
+}
+
+onMounted(async () => {
+  await waitForFonts()
   const sections = document.querySelectorAll('section')
+  const splitHeadings = new SplitText('h1, .h2', { type: 'lines' })
+
+  const tl = gsap.timeline()
+  tl.fromTo(
+    'header',
+    { opacity: 0.6, scale: 0.8 },
+    { opacity: 1, scale: 1, autoAlpha: 1, duration: 0.4 }
+  )
+    .from(splitHeadings.lines, {
+      duration: 0.5,
+      delay: 0.2,
+      rotationX: -90,
+      scaleX: 0.1,
+      stagger: 0.3,
+      transformOrigin: '50% 50% -100',
+      ease: 'back.out(1.7)'
+    })
+    .from(
+      '#arrow-down',
+      {
+        duration: 0.5,
+        y: 100,
+        opacity: 0,
+        ease: 'back.out(1.7)'
+      },
+      '+=1'
+    )
+    .to('#arrow-down', {
+      duration: 1,
+      y: 10,
+      scaleX: 1.1,
+      scaleY: 0.9,
+      repeat: -1,
+      yoyo: true,
+      ease: 'power4.in'
+    })
 
   sections.forEach((section) => {
     gsap.from(section, {
       opacity: 0,
       y: 50,
-      duration: 2,
       scrollTrigger: {
         trigger: section,
         start: 'top 80%',
@@ -26,12 +67,34 @@ onMounted(() => {
 <template>
   <header>
     <h1>Gljive</h1>
-    <span>Istražite svijet ovih čudesnih organizama</span>
+    <span class="h2">Istražite svijet ovih čudesnih organizama</span>
+
+    <svg
+      fill="#aaa"
+      version="1.1"
+      id="arrow-down"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      width="60px"
+      height="60px"
+      viewBox="0 0 30.727 30.727"
+      xml:space="preserve"
+    >
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+      <g id="SVGRepo_iconCarrier">
+        <g>
+          <path
+            d="M29.994,10.183L15.363,24.812L0.733,10.184c-0.977-0.978-0.977-2.561,0-3.536c0.977-0.977,2.559-0.976,3.536,0 l11.095,11.093L26.461,6.647c0.977-0.976,2.559-0.976,3.535,0C30.971,7.624,30.971,9.206,29.994,10.183z"
+          ></path>
+        </g>
+      </g>
+    </svg>
   </header>
 
   <main>
     <section>
-      <h1>Dobrodošli u tajanstveni svijet gljiva</h1>
+      <h2>Dobrodošli u tajanstveni svijet gljiva</h2>
       <p>
         Zamislite svijet skriven ispod površine tla, svijet u kojem mreže finih niti, nevidljive
         golom oku, povezuju biljke, drveće i tlo u veliku, živu mrežu. To je kraljevstvo gljiva –
@@ -597,11 +660,11 @@ onMounted(() => {
 
 <style scoped>
 header {
+  visibility: hidden;
   background-image: url('/images/mushroom-background.jpg');
   background-position: center;
-  background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  perspective: 200px;
 
   height: 100lvh;
   box-shadow: var(--header-box-shadow);
@@ -615,7 +678,7 @@ header {
 }
 
 header h1 {
-  font-size: 8rem;
+  font-size: 10rem;
   text-shadow:
     0px 10px 5px #111,
     -2px -2px 2px #222;
@@ -627,6 +690,11 @@ header span {
   text-shadow:
     0px 4px 3px #111,
     -1px -1px 1px #222;
+}
+
+header #arrow-down {
+  position: absolute;
+  bottom: 50px;
 }
 
 header h1,

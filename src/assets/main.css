@@ -38,6 +38,12 @@ nav .router-link-active {
   text-decoration: underline;
 }
 
+@media screen and (max-width: 768px) {
+  nav {
+    font-size: 1.5rem;
+  }
+}
+
 main {
   max-width: 1280px;
   margin: 0 auto;

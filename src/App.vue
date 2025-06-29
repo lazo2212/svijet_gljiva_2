@@ -1,5 +1,29 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
+import { gsap } from 'gsap/gsap-core'
+import ScrollTrigger from 'gsap/src/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
+onMounted(() => {
+  const tl = gsap.timeline()
+  tl.from('nav', { duration: 0.5, yPercent: -100, opacity: 0, ease: 'power1.out' })
+    .from('.logo', { opacity: 0, scale: 0.8, ease: 'back' })
+    .from('.link', { opacity: 0, scale: 0.8, ease: 'back', stagger: 0.1 }, '<')
+
+  ScrollTrigger.create({
+    start: 'start',
+    end: 'max',
+    onUpdate: (self) => {
+      if (self.direction === 1) {
+        gsap.to('nav', { duration: 0.5, yPercent: -100, opacity: 0, ease: 'power1.out' })
+      } else {
+        gsap.to('nav', { duration: 0.5, yPercent: 0, opacity: 1, ease: 'power1.out' })
+      }
+    }
+  })
+})
 
 const year = new Date().getFullYear()
 </script>
@@ -10,8 +34,8 @@ const year = new Date().getFullYear()
     <RouterLink class="logo" to="/">Svijet gljiva</RouterLink>
 
     <div class="nav-links">
-      <RouterLink to="/">Početna</RouterLink>
-      <RouterLink to="/catalog">Katalog</RouterLink>
+      <RouterLink class="link" to="/">Početna</RouterLink>
+      <RouterLink class="link" to="/catalog">Katalog</RouterLink>
     </div>
   </nav>
   <!-- The <router-view> component will render the matched component for the given route -->
@@ -42,3 +66,12 @@ const year = new Date().getFullYear()
     <p>&copy; {{ year }} Svijet gljiva. Sva prava pridržana.</p>
   </footer>
 </template>
+
+<style>
+.logo,
+.link {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+</style>
