@@ -13,8 +13,8 @@ onMounted(() => {
     .from('.link', { opacity: 0, scale: 0.8, ease: 'back', stagger: 0.1 }, '<')
 
   ScrollTrigger.create({
-    start: 'start',
-    end: 'max',
+    start: 'top top',
+    end: 'bottom top',
     onUpdate: (self) => {
       if (self.direction === 1) {
         gsap.to('nav', { duration: 0.5, yPercent: -100, opacity: 0, ease: 'power1.out' })
